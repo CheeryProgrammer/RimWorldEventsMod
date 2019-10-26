@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>RimWorld Event Mod</title>
+</head>
+<body>
+	<input type="button" onclick="sendcommand('жопа')" title="Жопа" value="Жопа" />
+	<input type="button" onclick="sendcommand('не жопа')" title="Не жопа" value="Не жопа" />
+	<input type="button" onclick="sendcommand('голова')" title="Голова" value="Голова" />
+	<div id="status"></div>
+	<script>
+		function sendcommand(message) {
+			// Sending and receiving data in JSON format using POST method
+			//
+			var xhr = new XMLHttpRequest();
+			var url = "http://localhost:26044";
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					document.getElementById("status").innerText = xhr.responseText;
+					//var json = JSON.parse(xhr.responseText);
+					//console.log(json.email + ", " + json.password);
+				}
+			};
+			xhr.send(message);
+		}
+	</script>
+</body>
+</html>
